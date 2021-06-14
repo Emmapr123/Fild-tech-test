@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
     View,
     Dimensions,
     Image,
-    StyleSheet
+    StyleSheet,
+    Animated
   } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { LikeButton } from '../../SVGs';
@@ -18,6 +19,33 @@ const CardComponent = ( {card}: CardComponentProps) => {
   // this liked state will decide the style of the look button
   // Usually this state would be decided by a liked atribute in the database -and the database would be updated onclick
   const [liked, setLiked] = useState(false)
+  const buttonAnimation = useRef(new Animated.Value(0)).current;
+
+  const onLike = () => {
+    if (liked) {
+      setLiked(false)
+    } else {
+    setLiked(true) 
+    animate()
+    }
+  }
+
+  const animate = () =>  {
+  
+  Animated.timing(buttonAnimation, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true
+    }).start(
+      () => buttonAnimation.setValue(0)
+    )
+
+  }
+
+  const shake = buttonAnimation.interpolate({
+      inputRange: [0, 0.2, 0.4, 0.6, 0.8, 1],
+      outputRange: ['0deg', '9deg', '-6deg', '4deg', '-10deg', '0deg']
+    })
 
   return(
     <View style={{borderRadius: 18, width: width * 0.9, backgroundColor: 'lightgray', flex: 1}}>
@@ -31,10 +59,11 @@ const CardComponent = ( {card}: CardComponentProps) => {
           <View style={{height:  100}}/>
         </LinearGradient>       
       </View>
+      <Animated.View style={{position: 'absolute', top: (height / 3 * 2 ) - 60, left: width - 100, transform: [{rotate: shake}]}}>
       <Button 
-        style={{position: 'absolute', top: (height / 3 * 2 ) - 60, left: width - 100}} 
-        text={<LikeButton width={180} fill={liked ? 'black' : 'none'}/>} 
-        onPress={() => liked ? setLiked(false) : setLiked(true)}/>
+        text={<LikeButton size={180} fill={liked ? 'black' : 'none'}/>} 
+        onPress={() => onLike()}/>
+      </Animated.View>
       <CardText {...{card}} />
     </View>
   )

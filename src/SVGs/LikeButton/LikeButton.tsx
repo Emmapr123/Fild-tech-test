@@ -1,13 +1,15 @@
 import * as React from "react"
-import Svg, { SvgProps, Path } from "react-native-svg"
+import Svg, { Path } from "react-native-svg"
+import { IconProps } from "../buttonprops.types"
 
-function LikeButton(props: SvgProps) {
+function LikeButton(props: IconProps) {
 
-  const { width=28, height=24, color="#1d1d1b", fill="none" } = props
+  const { size=24, color="#1d1d1b", fill="none" } = props
+
   return (
     <Svg
-      width={width}
-      height={height}
+      width={size}
+      height={size}
       viewBox="0 0 113.95 111.6"
       {...props}
     >

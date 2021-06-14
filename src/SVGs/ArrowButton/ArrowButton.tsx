@@ -1,11 +1,8 @@
 import * as React from "react"
-import Svg, { SvgProps, Path } from "react-native-svg"
+import Svg, { Path } from "react-native-svg"
+import { IconProps } from "../buttonprops.types"
 
-interface ButtonProps extends SvgProps {
-  size: number
-}
-
-function ArrowButton(props: ButtonProps) {
+function ArrowButton(props: IconProps) {
 
   const { size=24, stroke="#1d1d1b" } = props
 
