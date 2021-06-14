@@ -5,6 +5,7 @@ import {
     Dimensions,
     Image
   } from 'react-native'
+import { Button } from '../Button';
 
 interface Card {
   id: number,
