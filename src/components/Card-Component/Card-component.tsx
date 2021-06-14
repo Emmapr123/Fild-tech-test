@@ -8,18 +8,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { LikeButton } from '../../SVGs';
 import { Button } from '../Button';
-
-interface Card {
-  id: number,
-  image: string,
-  location: string,
-  title: string,
-  price: string
-}
-
-interface CardComponentProps {
-  card: Card
-}
+import { CardComponentProps } from './Card-component.types';
 
 const CardComponent = ( {card}: CardComponentProps) => {
   

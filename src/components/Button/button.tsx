@@ -1,16 +1,9 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { 
-  StyleProp,
   Text, 
   TouchableOpacity,
-  ViewStyle
 } from 'react-native';
-
-interface ButtonProps {
-  style?: StyleProp<ViewStyle>, 
-  text?: string | ReactNode, 
-  onPress: () => void
-}
+import { ButtonProps } from './Button.types';
 
 const Button = ({style, text, onPress}: ButtonProps) => {
 
