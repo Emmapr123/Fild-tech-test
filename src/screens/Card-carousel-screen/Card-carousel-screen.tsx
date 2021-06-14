@@ -1,9 +1,9 @@
 import React from 'react'
-import { FlatList, 
-  SafeAreaView, 
+import { SafeAreaView, 
   Text, 
   View, 
   Dimensions,
+  Animated,
   StyleSheet } from 'react-native'
 import { CardComponent } from '../../components'
 
@@ -43,25 +43,49 @@ const CardCarouselScreen = () => {
 
   const { width } = Dimensions.get('window')
   const ITEM_SIZE = width * 0.9
+  const scrollX = React.useRef(new Animated.Value(0)).current;
 
   return(
     <SafeAreaView style={{flex: 1}}>
       <Text style={styles.headerText}> Online Experiences </Text>
-      <FlatList 
+      <Animated.FlatList 
       data={data}
       horizontal
       keyExtractor={(data) => data.title}
       bounces={false}
       ItemSeparatorComponent={() => <View style={{width: width / 30}}/>}
       snapToInterval={ITEM_SIZE + width/38}
+
+      onScroll={Animated.event(
+        [{nativeEvent: {contentOffset: {x: scrollX}}}],
+        { useNativeDriver: true }
+      )}
+
       // style={}
       decelerationRate={'fast'}
       renderItem={({item, index}) => {
+        const inputRange = [
+              (index - 1) * ITEM_SIZE,
+              index * ITEM_SIZE,
+              (index + 1) * ITEM_SIZE
+            ]
+
+            const opacity = scrollX.interpolate({
+              inputRange,
+              outputRange: [.6, 1, .6]
+            })
+
+            const scale = scrollX.interpolate({
+              inputRange,
+              outputRange: [.97, 1, .97]
+            })
+
         return (
-        <View style={index === 0 ? {marginLeft: width/30} : {marginLeft: 0} &&
-        index === data.length - 1 ? {marginRight: width/30} : {marginRight: 0}}>
+        <Animated.View style={index === 0 ? {marginLeft: width/30} : {marginLeft: 0} &&
+        index === data.length - 1 ? {marginRight: width/30} : {marginRight: 0} && 
+        {opacity, transform: [{scale}]}}>
           <CardComponent key={index} card={item} />
-        </View>
+        </Animated.View>
         )
       }}
       />

@@ -11,7 +11,7 @@ import { Button } from '../Button';
 import { CardComponentProps } from './Card-component.types';
 import { CardText } from './Card-Text';
 
-const CardComponent = ( {card}: CardComponentProps) => {
+const CardComponent = ( {card, style}: CardComponentProps) => {
   
   const { width, height } = Dimensions.get('window')
   const [liked, setLiked] = useState(false)
