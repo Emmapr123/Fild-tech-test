@@ -1,7 +1,6 @@
 import React from 'react'
 import { FlatList, 
   SafeAreaView, 
-  ScrollView, 
   Text, 
   View, 
   Dimensions,
@@ -42,7 +41,7 @@ const CardCarouselScreen = () => {
     price: '30.00'
   }]
 
-  const { width, height } = Dimensions.get('window')
+  const { width } = Dimensions.get('window')
 
   return(
     <SafeAreaView style={{flex: 1}}>
