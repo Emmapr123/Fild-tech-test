@@ -42,6 +42,7 @@ const CardCarouselScreen = () => {
   }]
 
   const { width } = Dimensions.get('window')
+  const ITEM_SIZE = width * 0.9
 
   return(
     <SafeAreaView style={{flex: 1}}>
@@ -51,10 +52,17 @@ const CardCarouselScreen = () => {
       horizontal
       keyExtractor={(data) => data.title}
       bounces={false}
-      ItemSeparatorComponent={() => <View style={{width: width / 10}}/>}
-      snapToInterval={width}
+      ItemSeparatorComponent={() => <View style={{width: width / 30}}/>}
+      snapToInterval={ITEM_SIZE + width/38}
+      // style={}
+      decelerationRate={'fast'}
       renderItem={({item, index}) => {
-        return <CardComponent key={index} card={item} />
+        return (
+        <View style={index === 0 ? {marginLeft: width/30} : {marginLeft: 0} &&
+        index === data.length - 1 ? {marginRight: width/30} : {marginRight: 0}}>
+          <CardComponent key={index} card={item} />
+        </View>
+        )
       }}
       />
     </SafeAreaView>
