@@ -46,7 +46,7 @@ const CardCarouselScreen = () => {
 
   return(
     <SafeAreaView style={{flex: 1}}>
-      <Text> Online Experiences </Text>
+      <Text style={styles.headerText}> Online Experiences </Text>
       <FlatList 
       data={data}
       horizontal
@@ -61,5 +61,14 @@ const CardCarouselScreen = () => {
     </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  headerText: {
+    fontSize: 24, 
+    fontWeight: 'bold', 
+    margin: 10, 
+    padding: 10
+  }
+})
 
 export { CardCarouselScreen }
