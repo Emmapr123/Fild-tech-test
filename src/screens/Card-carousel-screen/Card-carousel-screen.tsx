@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { SafeAreaView, 
   Text, 
   View, 
   Dimensions,
   Animated,
-  StyleSheet } from 'react-native'
-import { CardComponent } from '../../components'
+  StyleSheet, 
+  FlatList} from 'react-native'
+import { Button, CardComponent } from '../../components'
+import { ArrowButton } from '../../SVGs'
 
 const CardCarouselScreen = () => {
 
@@ -42,9 +44,11 @@ const CardCarouselScreen = () => {
     price: '30.00'
   }]
 
-  const { width } = Dimensions.get('window')
+  const { width, height } = Dimensions.get('window')
   const ITEM_SIZE = width * 0.9
-  const scrollX = React.useRef(new Animated.Value(0)).current;
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const scrollRef = useRef<FlatList>(null);
+  const SEP_WIDTH = width/38
 
   return(
     <SafeAreaView style={{flex: 1}}>
@@ -53,10 +57,11 @@ const CardCarouselScreen = () => {
       <Animated.FlatList 
       data={data}
       horizontal
+      ref={scrollRef}
       keyExtractor={(data) => data.title}
       bounces={false}
-      ItemSeparatorComponent={() => <View style={{width: width / 30}}/>}
-      snapToInterval={ITEM_SIZE + width/38}
+      ItemSeparatorComponent={() => <View style={{width: SEP_WIDTH}}/>}
+      snapToInterval={ITEM_SIZE + SEP_WIDTH}
       onScroll={Animated.event(
         [{nativeEvent: {contentOffset: {x: scrollX}}}],
         { useNativeDriver: true }
@@ -82,7 +87,7 @@ const CardCarouselScreen = () => {
           inputRange,
           outputRange: [.9, 1, .95, 0.9]
         })
-        
+
           // In this style I use turneries that look at the index to decide if they are the first or last one
           // If they are first or last, i give them a padding so they will remain in the middle
         const style = {
@@ -94,6 +99,14 @@ const CardCarouselScreen = () => {
         return (
         <Animated.View style={style}>
           <CardComponent key={index} card={item} />
+          <Button 
+          style={{position: 'absolute', top: height / 3, left: 10, transform: [{rotate: '-180deg'}]}}
+          text={<ArrowButton size={40} stroke={index === 0 ? 'none' : 'black'}/>} 
+          onPress={() => scrollRef.current?.scrollToOffset({animated: true, offset: (index - 1) * (ITEM_SIZE + SEP_WIDTH)})} />
+          <Button 
+          style={{position: 'absolute', top: height / 3, right: 10}}
+          text={<ArrowButton size={40} stroke={index == data.length - 1 ? 'none' : 'black'}/>} 
+          onPress={() => scrollRef.current?.scrollToOffset({animated: true, offset: (index + 1) * (ITEM_SIZE + SEP_WIDTH)})} />
         </Animated.View>
         )
       }}
