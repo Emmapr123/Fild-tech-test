@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     View,
     Text,
-    Dimensions,
-    Image,
     StyleSheet
   } from 'react-native'
 import { CardComponentProps } from '../Card-component.types';

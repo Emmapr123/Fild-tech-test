@@ -9,6 +9,7 @@ import { CardComponent } from '../../components'
 
 const CardCarouselScreen = () => {
 
+  // This is just data to use in this example - usually I would use axios to do a get request to the backend/database
   const data = [{
     id: 1,
     image: 'https://images.unsplash.com/flagged/photo-1570286424640-675cdc1cbd5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80',
@@ -48,6 +49,7 @@ const CardCarouselScreen = () => {
   return(
     <SafeAreaView style={{flex: 1}}>
       <Text style={styles.headerText}> Online Experiences </Text>
+      {/* I am using an animated flatlist to optimise the visual aspect of the items that are not in focus */}
       <Animated.FlatList 
       data={data}
       horizontal
@@ -61,23 +63,28 @@ const CardCarouselScreen = () => {
       )}
       decelerationRate={'fast'}
       renderItem={({item, index}) => {
+
+        // The inputrage will be the same for all my animations so to keep it DRY I define that here
         const inputRange = [
-              (index - 1) * ITEM_SIZE,
-              index * ITEM_SIZE,
-              (index + 1) * ITEM_SIZE
-            ]
+          (index - 1) * ITEM_SIZE,
+          index * ITEM_SIZE,
+          (index + 1) * ITEM_SIZE
+        ]
 
-            const opacity = scrollX.interpolate({
-              inputRange,
-              outputRange: [.6, 1, .6]
-            })
+        // These two define the opacity and scale changes when you scroll through the list - used in style
+        const opacity = scrollX.interpolate({
+          inputRange,
+          outputRange: [.6, 1, .6]
+        })
 
-            const scale = scrollX.interpolate({
-              inputRange,
-              outputRange: [.97, 1, .97]
-            })
+        const scale = scrollX.interpolate({
+          inputRange,
+          outputRange: [.97, 1, .97]
+        })
 
         return (
+          // In this style I use turneries that look at the index to decide if they are the first or last one
+          // If they are first or last, i give them a padding so they will remain in the middle
         <Animated.View style={index === 0 ? {marginLeft: width/30} : {marginLeft: 0} &&
         index === data.length - 1 ? {marginRight: width/30} : {marginRight: 0} && 
         {opacity, transform: [{scale}]}}>
