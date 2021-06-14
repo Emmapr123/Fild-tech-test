@@ -21,12 +21,13 @@ const CardComponent = ( {card}: CardComponentProps) => {
   const [liked, setLiked] = useState(false)
   const buttonAnimation = useRef(new Animated.Value(0)).current;
 
+  // This function changes the state and causes the button to animate or to go back to its original state
   const onLike = () => {
     if (liked) {
       setLiked(false)
     } else {
-    setLiked(true) 
-    animate()
+      setLiked(true) 
+      animate()
     }
   }
 
@@ -42,6 +43,7 @@ const CardComponent = ( {card}: CardComponentProps) => {
 
   }
 
+  // This animated the rotation of the button, so that it shakes on click
   const shake = buttonAnimation.interpolate({
       inputRange: [0, 0.2, 0.4, 0.6, 0.8, 1],
       outputRange: ['0deg', '9deg', '-6deg', '4deg', '-10deg', '0deg']
