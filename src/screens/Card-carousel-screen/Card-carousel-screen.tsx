@@ -55,13 +55,10 @@ const CardCarouselScreen = () => {
       bounces={false}
       ItemSeparatorComponent={() => <View style={{width: width / 30}}/>}
       snapToInterval={ITEM_SIZE + width/38}
-
       onScroll={Animated.event(
         [{nativeEvent: {contentOffset: {x: scrollX}}}],
         { useNativeDriver: true }
       )}
-
-      // style={}
       decelerationRate={'fast'}
       renderItem={({item, index}) => {
         const inputRange = [

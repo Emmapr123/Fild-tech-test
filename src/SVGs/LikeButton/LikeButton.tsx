@@ -3,7 +3,7 @@ import Svg, { SvgProps, Path } from "react-native-svg"
 
 function LikeButton(props: SvgProps) {
 
-  const { width=42, height=148.8, color="#1d1d1b", fill="none" } = props
+  const { width=28, height=24, color="#1d1d1b", fill="none" } = props
   return (
     <Svg
       width={width}
@@ -12,11 +12,10 @@ function LikeButton(props: SvgProps) {
       {...props}
     >
       <Path
-        d="M57.18 26.92C63.95 4.16 76.44-.34 89.23 1.11c16.55 1.87 24.22 11.2 24.23 47.54 0 40.33-49.41 62.45-56 62.45C52.02 111.1.68 88.83.52 48.65.38 11.71 11.91.52 26.26.5 36.97.49 51.48 5.96 57.18 26.92z"
+        d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"        
         fill={fill}
         stroke={color}
-        strokeWidth={5}
-        strokeMiterlimit={40}
+        strokeWidth={2}
       />
     </Svg>
   )

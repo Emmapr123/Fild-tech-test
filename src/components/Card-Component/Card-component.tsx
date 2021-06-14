@@ -27,7 +27,7 @@ const CardComponent = ( {card, style}: CardComponentProps) => {
           <View style={{height:  100}}/>
         </LinearGradient>       
       </View>
-      <Button style={{position: 'absolute', top: (height / 3 * 2 ) - 100, right: 10}} text={<LikeButton fill={liked ? 'black' : 'none'}/>} onPress={() => liked ? setLiked(false) : setLiked(true)}/>
+      <Button style={{position: 'absolute', top: (height / 3 * 2 ) - 60, left: width - 100}} text={<LikeButton width={180} fill={liked ? 'black' : 'none'}/>} onPress={() => liked ? setLiked(false) : setLiked(true)}/>
       <CardText {...{card}} />
     </View>
   )
