@@ -20,18 +20,19 @@ interface CardComponentProps {
 
 const CardComponent = ( {card}: CardComponentProps) => {
 
-  // console.log(card)
-
   const { width, height } = Dimensions.get('window')
   return(
-    <View style={{borderWidth: 1, borderColor: 'black', borderRadius: 18, width: width * 0.8}}>
+    <View style={{borderRadius: 18, width: width * 0.9, backgroundColor: 'lightgray'}}>
       <Image 
-      style={{width: width * 0.8, height: height / 3 * 2}}
+      style={{width: width * 0.9, height: height / 3 * 2, borderTopLeftRadius: 18, borderTopRightRadius: 18}}
       source={{uri: card.image}}
       /> 
+      <View style={{padding: 10}}>
       <Text>{card.location}</Text>
-      <Text>{card.title}</Text>
-      <Text>{card.price} GBP</Text>
+      <Text style={{fontWeight: 'bold', fontSize: 24}}>{card.title}</Text>
+      <Text>Starting from</Text>
+      <Text style={{fontWeight: 'bold', fontSize: 24}}>{card.price} GBP</Text>
+      </View>
     </View>
   )
 }
