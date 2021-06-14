@@ -68,26 +68,31 @@ const CardCarouselScreen = () => {
         const inputRange = [
           (index - 1) * ITEM_SIZE,
           index * ITEM_SIZE,
-          (index + 1) * ITEM_SIZE
+          (index + 1) * ITEM_SIZE,
+          (index + 2) * ITEM_SIZE,
         ]
 
         // These two define the opacity and scale changes when you scroll through the list - used in style
         const opacity = scrollX.interpolate({
           inputRange,
-          outputRange: [.6, 1, .6]
+          outputRange: [.6, 1, .6, 0.3]
         })
 
         const scale = scrollX.interpolate({
           inputRange,
-          outputRange: [.97, 1, .97]
+          outputRange: [.9, 1, .95, 0.9]
         })
-
-        return (
+        
           // In this style I use turneries that look at the index to decide if they are the first or last one
           // If they are first or last, i give them a padding so they will remain in the middle
-        <Animated.View style={index === 0 ? {marginLeft: width/30} : {marginLeft: 0} &&
-        index === data.length - 1 ? {marginRight: width/30} : {marginRight: 0} && 
-        {opacity, transform: [{scale}]}}>
+        const style = {
+          marginLeft: index == 0 ? width/30 : 0,
+          marginRight: index === data.length - 1 ? width / 30 : 0,
+          opacity,
+          transform: [{scaleY: scale}]
+        }
+        return (
+        <Animated.View style={style}>
           <CardComponent key={index} card={item} />
         </Animated.View>
         )
