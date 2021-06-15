@@ -61,7 +61,7 @@ const CardComponent = ( {card}: CardComponentProps) => {
           <View style={{height:  100}}/>
         </LinearGradient>       
       </View>
-      <Animated.View style={{position: 'absolute', top: (height / 3 * 2 ) - 60, left: width - 100, transform: [{rotate: shake}]}}>
+      <Animated.View style={{position: 'absolute', top: (height / 3 * 2 ) - 60, left: width - 100,transform: [{rotate: shake}]}}>
       <Button 
         text={<LikeButton size={180} fill={liked ? 'black' : 'none'}/>} 
         onPress={() => onLike()}/>
