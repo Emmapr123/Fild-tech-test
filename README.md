@@ -9,3 +9,7 @@ To use:
 - clone this repo
 - run yarn or npm install
 - run expo start and pick i to open an ios simulator
+
+Or scan this QR code to see it on you own device  (You do need the expo go app for this)
+
+![QR](./assets/QR.png)
