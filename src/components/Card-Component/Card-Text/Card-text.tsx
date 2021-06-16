@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   boldText: {
     fontWeight: 'bold', 
-    fontSize: 24
+    fontSize: 18
   },
   title: {
     position: 'absolute', 
