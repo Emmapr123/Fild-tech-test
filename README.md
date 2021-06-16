@@ -6,4 +6,4 @@ I built this for mobile use, not for web.
 To use:
 - clone this repo
 - run yarn or npm install
-- expo start:ios
+- run expo start and pick i to open an ios simulator
