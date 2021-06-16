@@ -1,6 +1,6 @@
 ## Carousel
 
-![voorbeeld]('./assets/voorbeeld_fild.png)
+![voorbeeld]('../assets/voorbeeld_fild.png)
 
 This is a carousel component as it could be used in an app. 
 I built this for mobile use, not for web.
